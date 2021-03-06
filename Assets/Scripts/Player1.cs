@@ -4,7 +4,8 @@ public class Player1 : MonoBehaviour
 {
     AudioSource audioData;
     public Rigidbody2D rb;
-    public float speed = 750f;
+
+    public float speed = 7500f;
     public float jumpSpeed = 300f;
     int MAX_JUMP_TIMEOUT = 70;
     int jumpTimeout = 30;
@@ -30,5 +31,6 @@ public class Player1 : MonoBehaviour
         }
 
         rb.AddForce(movement * speed * Time.deltaTime);
+
     }
 }

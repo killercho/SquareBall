@@ -1,11 +1,17 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BallScript : MonoBehaviour
 {
     public Rigidbody2D rb;
     public Text ScoreBlue;
     public Text ScoreYellow;
+
+    public Text TimeToSpawn;
+    private const float MAX_TIME_REMAINING = 4f;
+    private float timeRemaining = 4f;
+    private bool timerRunning = false;
 
     private bool firstSpawn = true;
 
@@ -15,7 +21,6 @@ public class BallScript : MonoBehaviour
 
     private int blueDeaths = 0;
     private int yellowDeaths = 0;
-
 
     private void Update()
     {
@@ -27,6 +32,9 @@ public class BallScript : MonoBehaviour
             Vector2 directionLauched = new Vector2(randomDirection * randomForce,0);
             rb.AddForce(directionLauched);
             firstSpawn = false;
+
+            //Sets the timer to invisible
+            TimeToSpawn.gameObject.SetActive(false);
         }
 
         CheckBallLives();
@@ -47,12 +55,12 @@ public class BallScript : MonoBehaviour
     
     private void CheckBallLives()
     {
-        if (ballBlueLives == 0)
+        if (ballBlueLives == 0 && !timerRunning)
         {
             blueDeaths++;
             ScoreYellow.text = blueDeaths.ToString();
         }
-        if (ballYellowLives == 0)
+        if (ballYellowLives == 0 && !timerRunning)
         {
             yellowDeaths++;
             ScoreBlue.text = yellowDeaths.ToString();
@@ -70,9 +78,29 @@ public class BallScript : MonoBehaviour
 
             rb.velocity = Vector2.zero;
             transform.position = new Vector2(-0.5f, 2.5f);
-            rb.AddForce(directionStart);
-            ballBlueLives = maxBallLives;
-            ballYellowLives = maxBallLives;
+
+            //Pause state here while the timer is ticking
+            timerRunning = true;
+            if (timerRunning)
+            {
+                timeRemaining -= Time.deltaTime;
+                TimeToSpawn.gameObject.SetActive(true);
+                float secondsRemaining = Mathf.FloorToInt(timeRemaining % 60);
+                TimeToSpawn.text = secondsRemaining.ToString();
+                if (timeRemaining <= 1)
+                {
+                    timeRemaining = MAX_TIME_REMAINING;
+                    timerRunning = false;
+                    TimeToSpawn.gameObject.SetActive(false);
+                }
+
+            }
+            if (!timerRunning)
+            {
+                rb.AddForce(directionStart);
+                ballBlueLives = maxBallLives;
+                ballYellowLives = maxBallLives;
+            }
         }
     }
 
