@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class BallScript : MonoBehaviour
 {
+    AudioSource audioData;
     public Rigidbody2D rb;
     public Text ScoreBlue;
     public Text ScoreYellow;
@@ -21,6 +22,11 @@ public class BallScript : MonoBehaviour
 
     private int blueDeaths = 0;
     private int yellowDeaths = 0;
+
+    private void Start()
+    {
+        audioData = GetComponent<AudioSource>();
+    }
 
     private void Update()
     {
@@ -41,6 +47,7 @@ public class BallScript : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
+        audioData.Play(0);
         if (other.gameObject.name == "BlueField")
         {
             ballBlueLives--;
