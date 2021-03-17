@@ -4,8 +4,9 @@ public class Player2 : MonoBehaviour
 {
     AudioSource audioData;
     public Rigidbody2D rb;
+
     public float speed = 750f;
-    public float jumpSpeed = 300f;
+    public float jumpForce = 250f;
     int MAX_JUMP_TIMEOUT = 70;
     int jumpTimeout = 30;
     private void Start()
@@ -26,7 +27,7 @@ public class Player2 : MonoBehaviour
         {
             audioData.Play(0);
             jumpTimeout = MAX_JUMP_TIMEOUT;
-            rb.velocity = Vector2.up * jumpSpeed * Time.deltaTime;
+            rb.velocity = new Vector2(rb.velocity.x, (Vector2.up * jumpForce * Time.deltaTime).y);
         }
 
         rb.AddForce(movement * speed * Time.deltaTime);
