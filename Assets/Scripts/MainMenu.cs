@@ -8,6 +8,11 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    public void ResumeGame()
+    {
+
+    }
+
     public void QuitGame(){
         Debug.Log("Game exited with code 0!");
         Application.Quit();
