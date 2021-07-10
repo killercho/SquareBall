@@ -3,18 +3,15 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public GameObject mainMenuUI;
+    public GameObject optionsMenuUI;
+    public GameObject gameMenuUI;
 
-    public void PlayGame(){
+    public void PlayMultiplayerGame(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    public void ResumeGame()
-    {
-
-    }
-
     public void QuitGame(){
-        Debug.Log("Game exited with code 0!");
         Application.Quit();
     }
 }

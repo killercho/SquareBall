@@ -16,7 +16,7 @@ public class BallScript : MonoBehaviour
 
     private bool firstSpawn = true;
 
-    private int maxBallLives = 2;
+    private readonly int maxBallLives = 2;
     private int ballBlueLives = 2;
     private int ballYellowLives = 2;
 
@@ -118,5 +118,14 @@ public class BallScript : MonoBehaviour
     public int GetYellowLives()
     {
         return ballYellowLives;
+    }
+
+    public int GetYellowDeaths()
+    {
+        return yellowDeaths;
+    }
+    public int GetBlueDeaths()
+    {
+        return blueDeaths;
     }
 }

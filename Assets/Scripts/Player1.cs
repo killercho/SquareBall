@@ -6,7 +6,7 @@ public class Player1 : MonoBehaviour
     AudioSource audioData;
     public Rigidbody2D rb;
 
-    public float speed = 7500f;
+    public float speed = 4500f;
     public float jumpForce = 250f;
     int MAX_JUMP_TIMEOUT = 70;
     int jumpTimeout = 30;
