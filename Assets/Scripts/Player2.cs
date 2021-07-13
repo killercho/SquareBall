@@ -4,8 +4,9 @@ public class Player2 : MonoBehaviour
 {
     AudioSource audioData;
     public Rigidbody2D rb;
+    public PhysicsMaterial2D friction;
 
-    public float speed = 4500f;
+    public float speed = 8000f;
     public float jumpForce = 250f;
     int MAX_JUMP_TIMEOUT = 70;
     int jumpTimeout = 30;
@@ -29,6 +30,12 @@ public class Player2 : MonoBehaviour
             jumpTimeout = MAX_JUMP_TIMEOUT;
             rb.velocity = new Vector2(rb.velocity.x, (Vector2.up * jumpForce * Time.deltaTime).y);
         }
+
+        if (movementOnGround == 0)
+        {
+            friction.friction = 2f;
+        }
+        else friction.friction = 1;
 
         rb.AddForce(movement * speed * Time.deltaTime);
     }

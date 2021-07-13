@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class BallScript : MonoBehaviour
 {
@@ -44,6 +43,7 @@ public class BallScript : MonoBehaviour
         }
 
         CheckBallLives();
+        CheckBallBounds();
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
@@ -127,5 +127,18 @@ public class BallScript : MonoBehaviour
     public int GetBlueDeaths()
     {
         return blueDeaths;
+    }
+
+    //Move the ball back to the scene
+    private void CheckBallBounds()
+    {
+        if (rb.transform.position.x > 9)
+        {
+            rb.transform.position.Set(5, rb.transform.position.y, rb.transform.position.z);
+        }
+        else if (rb.transform.position.x < -10)
+        {
+            rb.transform.position.Set(-5, rb.transform.position.y, rb.transform.position.z);
+        }
     }
 }
